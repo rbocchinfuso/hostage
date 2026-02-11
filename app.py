@@ -2,6 +2,24 @@ import random
 import time
 
 import streamlit as st
+from gtts.lang import tts_langs
+from streamlit_TTS import text_to_speech
+
+# Get available languages
+langs = tts_langs()
+
+# Welcome message
+text_to_speech(
+    "Choose a language, type some text, and click 'Speak it out!'", language="en"
+)
+
+# Language selection
+lang = st.selectbox("Choose a language", options=list(langs.keys()))
+text = st.text_input("Enter text to speak:")
+
+if st.button("Speak it out!") and lang and text:
+    text_to_speech(text=text, language=lang)
+
 
 # --- CONFIGURATION & MOCK RAG DATA ---
 # In a production app, these would be retrieved from a Vector DB based on user input.
